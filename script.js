@@ -6,7 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const showCompletedButton = document.getElementById('show-completed');
   const showIncompleteButton = document.getElementById('show-incomplete');
 
-  let tasks = [];
+  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+  const saveTasksToLocalStorage = () => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  };
 
   const renderTasks = (filter) => {
     taskList.innerHTML = '';
@@ -27,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       toggleButton.textContent = task.completed ? 'Undo' : 'Complete';
       toggleButton.addEventListener('click', () => {
         task.completed = !task.completed;
+        saveTasksToLocalStorage();
         renderTasks(filter);
       });
 
@@ -34,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
       deleteButton.textContent = 'Delete';
       deleteButton.addEventListener('click', () => {
         tasks = tasks.filter(t => t !== task);
+        saveTasksToLocalStorage();
         renderTasks(filter);
       });
 
@@ -53,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (taskText) {
       tasks.push({ text: taskText, completed: false });
       taskInput.value = '';
+      saveTasksToLocalStorage();
       renderTasks('all');
     }
   });
@@ -72,12 +79,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const formattedHours = hours.toString().padStart(2, '0');
 
     clock.textContent = `${formattedHours}:${minutes}:${seconds} ${ampm}`;
-};
+  };
 
-setInterval(updateClock, 1000);
-updateClock();
-
+  setInterval(updateClock, 1000);
+  updateClock();
 
   renderTasks('all');
 });
+
   
