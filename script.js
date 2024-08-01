@@ -6,15 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const showCompletedButton = document.getElementById('show-completed');
   const showIncompleteButton = document.getElementById('show-incomplete');
 
-  // Retrieve tasks from local storage
   let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-  // Function to save tasks to local storage
   const saveTasksToLocalStorage = () => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   };
 
-  // Function to render tasks based on filter
   const renderTasks = (filter) => {
     taskList.innerHTML = '';
     let filteredTasks = tasks;
@@ -25,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
       filteredTasks = tasks.filter(task => !task.completed);
     }
 
-    // Create and append task items to the task list
     filteredTasks.forEach(task => {
       const taskItem = document.createElement('li');
       taskItem.textContent = task.text;
@@ -54,12 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // Event listeners for filter buttons
   showAllButton.addEventListener('click', () => renderTasks('all'));
   showCompletedButton.addEventListener('click', () => renderTasks('completed'));
   showIncompleteButton.addEventListener('click', () => renderTasks('incomplete'));
 
-  // Function to add a new task
   const addTask = () => {
     const taskText = taskInput.value.trim();
     if (taskText) {
@@ -70,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Event listener for adding a new task
   addTaskButton.addEventListener('click', addTask);
 
   taskInput.addEventListener('keypress', (e) => {
@@ -79,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Function to update the clock
   const updateClock = () => {
     const clock = document.getElementById('clock');
     const now = new Date();
