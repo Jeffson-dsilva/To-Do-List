@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const showCompletedButton = document.getElementById('show-completed');
   const showIncompleteButton = document.getElementById('show-incomplete');
 
-  // Retrieve tasks from local storage 
+  // Retrieve tasks from local storage
   let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
   // Function to save tasks to local storage
@@ -34,17 +34,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const toggleButton = document.createElement('button');
       toggleButton.textContent = task.completed ? 'Undo' : 'Complete';
       toggleButton.addEventListener('click', () => {
-        task.completed = !task.completed; 
+        task.completed = !task.completed;
         saveTasksToLocalStorage();
-        renderTasks(filter); 
+        renderTasks(filter);
       });
 
       const deleteButton = document.createElement('button');
       deleteButton.textContent = 'Delete';
       deleteButton.addEventListener('click', () => {
-        tasks = tasks.filter(t => t !== task); 
-        saveTasksToLocalStorage(); 
-        renderTasks(filter); 
+        tasks = tasks.filter(t => t !== task);
+        saveTasksToLocalStorage();
+        renderTasks(filter);
       });
 
       taskItem.appendChild(toggleButton);
@@ -59,20 +59,21 @@ document.addEventListener('DOMContentLoaded', () => {
   showCompletedButton.addEventListener('click', () => renderTasks('completed'));
   showIncompleteButton.addEventListener('click', () => renderTasks('incomplete'));
 
-  // Event listener for adding a new task
-  addTaskButton.addEventListener('click', () => {
+  // Function to add a new task
+  const addTask = () => {
     const taskText = taskInput.value.trim();
     if (taskText) {
       tasks.push({ text: taskText, completed: false });
-      taskInput.value = ''; 
-      saveTasksToLocalStorage(); 
-      renderTasks('all'); 
+      taskInput.value = '';
+      saveTasksToLocalStorage();
+      renderTasks('all');
     }
-  });
+  };
 
+  // Event listener for adding a new task
   addTaskButton.addEventListener('click', addTask);
 
-  taskInput.addEventListener('keypress',(e) => {
+  taskInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
       addTask();
     }
@@ -95,10 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
     clock.textContent = `${formattedHours}:${minutes}:${seconds} ${ampm}`;
   };
 
-  setInterval(updateClock, 1000); 
-  updateClock(); 
+  setInterval(updateClock, 1000);
+  updateClock();
 
-  renderTasks('all'); 
+  renderTasks('all');
 });
 
   
