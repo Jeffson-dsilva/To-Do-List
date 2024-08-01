@@ -68,6 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
       saveTasksToLocalStorage(); 
       renderTasks('all'); 
     }
+  };
+
+  addTaskButton.addEventListener('click', addTask);
+
+  taskInput.addEventListener('keypress',(e) => {
+    if (e.key === 'Enter') {
+      addTask();
+    }
   });
 
   // Function to update the clock
