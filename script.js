@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
       saveTasksToLocalStorage(); 
       renderTasks('all'); 
     }
-  };
+  });
 
   addTaskButton.addEventListener('click', addTask);
 
