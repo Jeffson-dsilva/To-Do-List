@@ -57,8 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       
       taskItem.appendChild(toggleButton);
-      taskItem.appendChild(deleteButton);
       taskItem.appendChild(editButton);
+      taskItem.appendChild(deleteButton);
+      
       taskList.appendChild(taskItem);
     });
   };
