@@ -43,9 +43,22 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTasks(filter);
       });
 
+
+       const editButton = document.createElement('button');
+      editButton.textContent = 'Edit';
+      editButton.addEventListener('click', () => {
+        const newTaskText = prompt('Edit your task:', task.text);
+        if (newTaskText !== null && newTaskText.trim() !== '') {
+          task.text = newTaskText.trim();
+          saveTasksToLocalStorage();
+          renderTasks(filter);
+        }
+      });
+
+      
       taskItem.appendChild(toggleButton);
       taskItem.appendChild(deleteButton);
-
+      taskItem.appendChild(editButton);
       taskList.appendChild(taskItem);
     });
   };
